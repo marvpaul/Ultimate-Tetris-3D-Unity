@@ -10,7 +10,7 @@ using TMPro;
  * Tried to implement a version similiar to the original Tetris
  */
 public class Highscore : MonoBehaviour {
-	public int level, rows, points, lastRows; 
+	public int level, rows, points; 
 	public TMP_Text highscoreText, levelText, rowText; 
 	// Use this for initialization
 	void Start () {
@@ -37,15 +37,10 @@ public class Highscore : MonoBehaviour {
 			case 3: 
 				points += 300 * (level + 1); 
 				break;
-			case 4: 
-				if (lastRows == 4) {
-					//TODO: Give points for double tetris!!!
-				} else {
-					points += 1200 * (level + 1); 
-				}
+			case 4:
+				points += 1200 * (level + 1); 
 				break; 
 			}
-			lastRows = lines; 
 			rows += lines; 
 			level = (int)rows/10; 
 			setNewSpeed (); 
