@@ -1,10 +1,13 @@
 # Ultimate Tetris 3D
 This is a Tetris clone written in C# using the Unity Engine. 
 
-## Screenshot
+## Showcase
 Looks like this :)
 ![Screenshot](https://i.imgur.com/0Phi5NU.png)
- <br /><br />
+ <br />
+ Here's a video as well <br>
+ 
+ * [Gameplay video on YT](https://youtu.be/Q_ciD2T-J0A)<br />
 
 ## Assets
 Assets I used to build the game
