@@ -1,12 +1,12 @@
-#Ultimate Tetris 3D
+# Ultimate Tetris 3D
 This is a Tetris clone written in C# using the Unity Engine. 
 
-##Screenshot
+## Screenshot
 Looks like this :)
 ![Screenshot](https://i.imgur.com/0Phi5NU.png)
  <br /><br />
 
-##Assets
+## Assets
 Assets I used to build the game
 
 * Skyboxes:
@@ -21,7 +21,7 @@ Assets I used to build the game
 	* https://www.assetstore.unity3d.com/en/#!/content/32831
 <br /><br />
 
-##Movement control
+## Movement control
 Basic movement: <br>
 
 * A - move tile to left
@@ -30,7 +30,7 @@ Basic movement: <br>
 * R - rotate tile to right
 * L - rotate tile to left
 
-##Scoring system / tile speed
+## Scoring system / tile speed
 I tried to use the original scoring system as well as speed increasement. Here are some ressources I've used: <br>
  
 * Speed increasement
@@ -38,7 +38,7 @@ I tried to use the original scoring system as well as speed increasement. Here a
 * Scoring system
 	* http://tetris.wikia.com/wiki/Scoring 
 
-##Contributions
-Thanks for contributions Alex <br>
+## Contributions
+Thanks for contributions Alex :+1:<br>
 
 * https://github.com/alexandertiedmann
