@@ -14,7 +14,7 @@ public class GarbageCollector : MonoBehaviour {
 		if (time > interval) {
 			time = 0; 
 			foreach (GameObject groupBlock in GameObject.FindGameObjectsWithTag("Group")) {
-				if (groupBlock.transform.childCount == 0) {
+				if (groupBlock.transform.GetChildCount () == 0) {
 					Destroy (groupBlock); 
 				}
 			}

@@ -1,18 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using System;
 
-
-/*
- * This class is a represantation of the game grid
- * Each position where a cube can be placed
- * a boolean value represents if there is a cube or not
- */
 public class CubeArray : MonoBehaviour {
 	Highscore hScore; 
 	bool[,] isCube; 
-
 	// Use this for initialization
 	void Start () {
 		hScore = gameObject.GetComponent<Highscore> (); 
@@ -83,5 +77,26 @@ public class CubeArray : MonoBehaviour {
 				isFullLine [j] -= 1;
 			}
 		}
+			
+
 	}
 }
+
+/*
+ * 	//Only for debug purposes 
+private void printArray(){
+	int rowLength = isCube.GetLength(0);
+	int colLength = isCube.GetLength(1);
+
+	for (int i = 0; i < rowLength; i++)
+	{
+		string line = ""; 
+		for (int j = 0; j < colLength; j++)
+		{
+			line += isCube [i, j].ToString (); 
+		}
+		print (line); 
+	}
+	Console.ReadLine();
+}
+*/

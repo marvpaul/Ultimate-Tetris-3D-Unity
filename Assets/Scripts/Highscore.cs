@@ -4,11 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/*
- * All code for the 
- * highscore scoring system
- * Tried to implement a version similiar to the original Tetris
- */
 public class Highscore : MonoBehaviour {
 	public int level, rows, points; 
 	public TMP_Text highscoreText, levelText, rowText; 
@@ -25,6 +20,7 @@ public class Highscore : MonoBehaviour {
 	}
 
 	//Scoring system found at http://tetris.wikia.com/wiki/Scoring
+	//TODO: add double tetris
 	public void addPointsForLines(int lines){
 		if (lines > 0) {
 			switch (lines) {
@@ -37,7 +33,7 @@ public class Highscore : MonoBehaviour {
 			case 3: 
 				points += 300 * (level + 1); 
 				break;
-			case 4:
+			case 4: 
 				points += 1200 * (level + 1); 
 				break; 
 			}
@@ -48,13 +44,12 @@ public class Highscore : MonoBehaviour {
 		}
 	}
 
-	//Add points for each group which was added to the grid
+	//Add points for each group which was added
 	public void addPointsForCubes(){
 		points += 4; 
 		transmitToUI (); 
 	}
 
-	//Transmit the data to UI 
 	public void transmitToUI(){
 		highscoreText.text = points.ToString (); 
 		levelText.text = level.ToString (); 

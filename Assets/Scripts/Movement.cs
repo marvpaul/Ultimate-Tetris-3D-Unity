@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-/*
- * This class handles movement of the cube groups
- */
 public class Movement : MonoBehaviour {
+	Highscore hScore; 
 	public float timestep = 0.2F; 
 	float time; 
 
@@ -17,7 +15,8 @@ public class Movement : MonoBehaviour {
 
 
 	void Start(){
-		cA = gameObject.GetComponent<CubeArray> ();
+		cA = gameObject.GetComponent<CubeArray> (); 
+		hScore = gameObject.GetComponent<Highscore> (); 
 	}
 
 	public void startGame(){
@@ -52,7 +51,6 @@ public class Movement : MonoBehaviour {
 		cA.updateArrayBool ();
 	}
 
-	//Move the current active group or spawn a new group
 	void move(Vector3 pos){
 		if (actualGroup != null) {
 			actualGroup.transform.position += pos; 
@@ -72,8 +70,9 @@ public class Movement : MonoBehaviour {
 		actualGroup = gameObject.GetComponent<GroupSpawner> ().spawnNext ();
 		actualGroup.GetComponent<Rotation> ().isActive = true;
 		if (!cA.updateArrayBool ()) {
-			GameObject.Find("Canvas").GetComponent<HighscoreManager>().showHighscores(gameObject.GetComponent<Highscore> ().points);
-			Time.timeScale = 0F; 
+			print ("GAME OVER!!!"); 
+			//Theres a better way, but for now - keep it simple :) 
+			Application.LoadLevel (Application.loadedLevelName); 
 		} else {
 			cA.checkForFullLine ();
 		} 
