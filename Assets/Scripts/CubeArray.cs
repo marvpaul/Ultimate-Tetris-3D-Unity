@@ -5,41 +5,32 @@ using System.Linq;
 using System;
 
 public class CubeArray : MonoBehaviour {
-	Highscore hScore; 
 	bool[,] isCube; 
-	// Use this for initialization
-	void Start () {
-		hScore = gameObject.GetComponent<Highscore> (); 
-		isCube = new bool[10,17];
-		updateArrayBool (); 
-	}
 
 	//Update the cube array and return false if there is any intersection between two cubes
-	public bool updateArrayBool(){
+	public bool getCubePositionFromScene(){
 		isCube = new bool[10, 17]; 
-		bool withoutIntersection = true; 
 		foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube")) {
 			int x = (int)cube.transform.position.x; 
 			int y = (int)cube.transform.position.y;
 			if (x >= 0 && x < isCube.GetLength (0) && y >= 0 && y < isCube.GetLength (1)) {
 				bool cubeSetted = isCube [x, y]; 
 				if (cubeSetted) {
-					//Position in array is always setted
-					withoutIntersection = false;
+					// Two cubes have the same position --> intersection
+					return false;
 				} else {
-					isCube [(int)cube.transform.position.x, (int)cube.transform.position.y] = true;
+					isCube [x, y] = true;
 				}
 			} else {
-				//Position is out of range 
-				withoutIntersection = false; 
+				//Position is out of range, e.g. when we are trying to set down when it's not possible
+				return false;
 			}
 		}
-		return withoutIntersection; 
+		return true; 
 	}
 
 
 	public void checkForFullLine(){
-
 		//Check if there is any full line 
 		List<int> isFullLine = new List<int> (); 
 		for (int i = 0; i < isCube.GetLength (1); i++) {
@@ -52,7 +43,7 @@ public class CubeArray : MonoBehaviour {
 				isFullLine.Add (i); 
 		}
 
-		hScore.addPointsForLines (isFullLine.Count); 
+		gameObject.GetComponent<Highscore>().addPointsForLines (isFullLine.Count); 
 
 		//For each full line
 		for(int i = 0; i < isFullLine.Count; i++){
@@ -60,8 +51,11 @@ public class CubeArray : MonoBehaviour {
 			foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube")) {
 				int y = (int)cube.transform.position.y;
 				if(isFullLine[i] == y){
-					//Heres goes a incredible cool explosion effect!!!
-					Destroy (cube); 
+					if(cube.transform.parent.childCount == 1){
+						Destroy(cube.transform.parent.gameObject);
+					} else {
+						Destroy (cube); 
+					}
 				}
 			}
 			//Set down all cubes above the deleted row
@@ -71,7 +65,8 @@ public class CubeArray : MonoBehaviour {
 					cube.transform.position += Vector3.down; 
 				}
 			}
-			gameObject.GetComponent<ManageAudio> ().PlayFullLine (); 
+			
+			GameObject.Find("FullLine").GetComponent<AudioSource>().Play();
 
 			for (int j = 0; j < isFullLine.Count; j++) {
 				isFullLine [j] -= 1;
@@ -81,22 +76,3 @@ public class CubeArray : MonoBehaviour {
 
 	}
 }
-
-/*
- * 	//Only for debug purposes 
-private void printArray(){
-	int rowLength = isCube.GetLength(0);
-	int colLength = isCube.GetLength(1);
-
-	for (int i = 0; i < rowLength; i++)
-	{
-		string line = ""; 
-		for (int j = 0; j < colLength; j++)
-		{
-			line += isCube [i, j].ToString (); 
-		}
-		print (line); 
-	}
-	Console.ReadLine();
-}
-*/

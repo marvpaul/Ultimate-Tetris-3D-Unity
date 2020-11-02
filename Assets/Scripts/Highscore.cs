@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Highscore : MonoBehaviour {
 	public int level, rows, points; 
-	public TMP_Text highscoreText, levelText, rowText; 
+	public Text highscoreText, levelText, rowText; 
 	// Use this for initialization
 	void Start () {
 		level = 0;
 		rows = 0; 
 		points = 0; 
-		setNewSpeed (); 
+		gameObject.GetComponent<Movement>().setNewSpeed(); 
 	}
-	//Speed increasement found at http://www.colinfahey.com/tetris/tetris.html 5.10 
-	public void setNewSpeed(){
-		gameObject.GetComponent<Movement>().timestep = ((10 - level) * 0.05F);
-	}
+	
 
 	//Scoring system found at http://tetris.wikia.com/wiki/Scoring
-	//TODO: add double tetris
 	public void addPointsForLines(int lines){
 		if (lines > 0) {
 			switch (lines) {
@@ -39,7 +34,7 @@ public class Highscore : MonoBehaviour {
 			}
 			rows += lines; 
 			level = (int)rows/10; 
-			setNewSpeed (); 
+			gameObject.GetComponent<Movement>().setNewSpeed(); 
 			transmitToUI (); 
 		}
 	}

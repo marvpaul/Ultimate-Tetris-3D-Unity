@@ -16,7 +16,7 @@ public class Rotation : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () { 
-		cA = GameObject.Find("Main Camera").GetComponent<CubeArray> (); 
+		cA = Camera.main.GetComponent<CubeArray> (); 
 		//Assign the 4 blocks of each group 
 		blocks = new Transform[4]; 
 		for (int i = 0; i < transform.childCount; i++) {
@@ -26,22 +26,22 @@ public class Rotation : MonoBehaviour {
 	}
 
 	//Perform rotation to left side
-	public void rotateLeft(bool back){
+	public void rotateLeft(){
 		rotAngel = getRotAngle (rotAngel + 90); 
 		rotate (rotAngel / 90); 
-		if (!back && !cA.updateArrayBool()) {
-			rotateRight (true); 
-			GameObject.Find("Main Camera").GetComponent<ManageAudio> ().playCantMove (); 
+		if (!cA.getCubePositionFromScene()) {
+			rotateRight (); 
+			GameObject.Find("CantMove").GetComponent<AudioSource>().Play();
 		} 
 	}
 
 	//Perform rotation clockwards
-	public void rotateRight(bool back){
+	public void rotateRight(){
 		rotAngel = getRotAngle (rotAngel - 90); 
 		rotate (rotAngel / 90); 
-		if (!back && !cA.updateArrayBool ()) {
-			rotateLeft (true); 
-			GameObject.Find("Main Camera").GetComponent<ManageAudio> ().playCantMove (); 
+		if (!cA.getCubePositionFromScene ()) {
+			rotateLeft (); 
+			GameObject.Find("CantMove").GetComponent<AudioSource>().Play();
 		} 
 	}
 		
